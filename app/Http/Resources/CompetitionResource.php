@@ -18,7 +18,7 @@ class CompetitionResource extends JsonResource
             'id'            => $this->id,
             'type'          => $this->type,
             'date'          => $this->date,
-            'competitors'   => CompetitorResource::collection( $this->competitors ),
+            'competitors'   => CompetitorResource::collection( $this->whenLoaded('competitors') ),
             'created_at'    => $this->created_at,
             'updated_at'    => $this->updated_at
         ];

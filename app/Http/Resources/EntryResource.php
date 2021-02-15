@@ -14,6 +14,13 @@ class EntryResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id'                => $this->id,
+            'competition'       => new CompetitionResource( $this->whenLoaded('competition') ),
+            'competitor'        => new CompetitorResource( $this->whenLoaded('competitor') ),
+            'start'             => $this->start,
+            'finish'            => $this->finish,
+            'time'              => $this->time
+        ];
     }
 }

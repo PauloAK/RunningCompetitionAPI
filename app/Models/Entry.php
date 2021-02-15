@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Carbon\Carbon;
+use Carbon\CarbonInterface;
 
 class Entry extends Pivot
 {
@@ -20,6 +22,8 @@ class Entry extends Pivot
      * @var array
      */
     protected $fillable = [
+        'competition_id',
+        'competitor_id',
         'start',
         'finish'
     ];
@@ -36,14 +40,15 @@ class Entry extends Pivot
     /**
      * Get the entry time
      *
-     * @return integer|null
+     * @return string|null
      */
-    public function getTimeAttribute(): ?integer
+    public function getTimeAttribute(): ?string
     {
         if ( !$this->attributes['start'] || ! $this->attributes['finish'])
             return null;
         else
-            return Carbon::parse($this->attributes['start'])->diffInSeconds(Carbon::parse($this->attributes['finish']));
+            return Carbon::parse($this->attributes['start'])
+                        ->diffForHumans(Carbon::parse($this->attributes['finish']), ['syntax' => CarbonInterface::DIFF_ABSOLUTE]);
     }
 
     /**

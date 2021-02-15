@@ -24,6 +24,17 @@ class Competition extends Model
      */
     public function competitors(): BelongsToMany
     {
-        return $this->belongsToMany(Competitor::class, Entry::class)->withPivot('start', 'finish');
+        return $this->belongsToMany(Competitor::class, Entry::class)->withPivot('start', 'finish', 'time');
+    }
+
+    /**
+     * Overrides the delete method, to detach competitors first
+     *
+     * @return void
+     */
+    public function delete()
+    {
+        $this->competitors()->detach();
+        parent::delete();
     }
 }

@@ -16,7 +16,7 @@ class CompetitorController extends Controller
 
     function __construct()
     {
-        $this->competitor = new competitor;
+        $this->competitor = new Competitor;
     }
 
     /**
@@ -26,7 +26,7 @@ class CompetitorController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-        $competitors = $this->competitor->all();
+        $competitors = $this->competitor->with('competitions')->get();
         return CompetitorResource::collection( $competitors );
     }
 
@@ -37,7 +37,7 @@ class CompetitorController extends Controller
      */
     public function show(Competitor $competitor): CompetitorResource
     {
-        return new CompetitorResource( $competitor );
+        return new CompetitorResource( $competitor->load('competitions') );
     }
 
     /**
@@ -48,7 +48,7 @@ class CompetitorController extends Controller
     public function store(StoreRequest $request): CompetitorResource
     {
         $competitor = $this->competitor->create($request->all());
-        return new CompetitorResource( $competitor );
+        return new CompetitorResource( $competitor->load('competitions') );
     }
 
     /**
@@ -59,7 +59,7 @@ class CompetitorController extends Controller
     public function update(UpdateRequest $request, Competitor $competitor): CompetitorResource
     {
         $competitor->update($request->all());
-        return new CompetitorResource( $competitor );
+        return new CompetitorResource( $competitor->load('competitions') );
     }
 
     /**

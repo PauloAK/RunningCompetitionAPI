@@ -26,7 +26,7 @@ class CompetitionController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-        $competitions = $this->competition->all();
+        $competitions = $this->competition->with('competitors')->get();
         return CompetitionResource::collection( $competitions );
     }
 
@@ -37,7 +37,7 @@ class CompetitionController extends Controller
      */
     public function show(Competition $competition): CompetitionResource
     {
-        return new CompetitionResource( $competition );
+        return new CompetitionResource( $competition->load('competitors') );
     }
 
     /**
@@ -48,7 +48,7 @@ class CompetitionController extends Controller
     public function store(StoreRequest $request): CompetitionResource
     {
         $competition = $this->competition->create($request->all());
-        return new CompetitionResource( $competition );
+        return new CompetitionResource( $competition->load('competitors') );
     }
 
     /**
@@ -59,7 +59,7 @@ class CompetitionController extends Controller
     public function update(UpdateRequest $request, Competition $competition): CompetitionResource
     {
         $competition->update($request->all());
-        return new CompetitionResource( $competition );
+        return new CompetitionResource( $competition->load('competitors') );
     }
 
     /**

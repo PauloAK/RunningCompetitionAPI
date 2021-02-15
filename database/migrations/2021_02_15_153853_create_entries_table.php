@@ -17,8 +17,8 @@ class CreateEntriesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('competition_id');
             $table->unsignedInteger('competitor_id');
-            $table->timestamp('start')->nullable();
-            $table->timestamp('finish')->nullable();
+            $table->timestamp('start');
+            $table->timestamp('finish');
             $table->timestamps();
 
             $table->foreign('competition_id')->references('id')->on('competitions');

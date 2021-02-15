@@ -32,7 +32,7 @@ class Competitor extends Model
      *
      * @return integer
      */
-    public function getAgeAttribute()
+    public function getAgeAttribute(): integer
     {
         return Carbon::parse($this->attributes['birthdate'])->age;
     }

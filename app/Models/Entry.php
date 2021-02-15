@@ -30,7 +30,7 @@ class Entry extends Pivot
      *
      * @return integer|null
      */
-    public function getTimeAttribute()
+    public function getTimeAttribute(): ?integer
     {
         if ( !$this->attributes['start'] || ! $this->attributes['finish'])
             return null;

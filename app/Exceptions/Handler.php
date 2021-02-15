@@ -50,6 +50,32 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        return parent::render($request, $exception);
+        return $this->handleApiException($request, $exception);
+    }
+
+    private function handleApiException($request, Exception $exception)
+    {
+        $statusCode = null;
+        if (method_exists($exception, 'getStatusCode')) {
+            $statusCode = $exception->getStatusCode();
+        }
+
+        if ($exception instanceof \Illuminate\Validation\ValidationException) {
+            return response()->json([
+                'errors' => $exception->errors()
+            ], 422);
+        } else if ($exception instanceof \Illuminate\Database\Eloquent\ModelNotFoundException || $statusCode == 404) {
+            return response()->json([
+                'message' => 'Not Found'
+            ], 404);
+        } else if ($statusCode == 405) {
+            return response()->json([
+                'message' => 'Method not allowed'
+            ], 405);
+        } else {
+            return response()->json([
+                'message' => 'Whoops, looks like something went wrong!'
+            ], $statusCode ?? 500);
+        }
     }
 }

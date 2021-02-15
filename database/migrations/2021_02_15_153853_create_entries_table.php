@@ -22,7 +22,7 @@ class CreateEntriesTable extends Migration
             $table->timestamps();
 
             $table->foreign('competition_id')->references('id')->on('competitions');
-            $table->foreign('competitor_id')->references('id')->on('competitor');
+            $table->foreign('competitor_id')->references('id')->on('competitors');
         });
     }
 

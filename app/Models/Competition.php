@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Competition extends Model
 {
@@ -23,6 +24,6 @@ class Competition extends Model
      */
     public function competitors(): BelongsToMany
     {
-        return $this->belongsToMany(Competitor::class)->using(Entry::class)->withPivot('start', 'finish');
+        return $this->belongsToMany(Competitor::class, Entry::class)->withPivot('start', 'finish');
     }
 }

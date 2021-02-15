@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Competitor extends Model
 {
@@ -32,7 +33,7 @@ class Competitor extends Model
      *
      * @return integer
      */
-    public function getAgeAttribute(): integer
+    public function getAgeAttribute(): int
     {
         return Carbon::parse($this->attributes['birthdate'])->age;
     }
@@ -44,8 +45,6 @@ class Competitor extends Model
      */
     public function competitions(): BelongsToMany
     {
-        return $this->belongsToMany(Competition::class)
-                    ->using(Entry::class)
-                    ->withPivot('start', 'finish');
+        return $this->belongsToMany(Competition::class, Entry::class)->withPivot('start', 'finish');
     }
 }

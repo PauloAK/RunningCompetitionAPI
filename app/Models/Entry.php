@@ -3,9 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Entry extends Pivot
 {
+    /**
+     * Table name
+     *
+     * @var string
+     */
+    protected $table = 'entries';
+
     /**
      * Model fillables
      *

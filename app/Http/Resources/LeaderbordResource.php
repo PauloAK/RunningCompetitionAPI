@@ -14,6 +14,8 @@ class LeaderbordResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'competitions' => $this->competitions
+        ];
     }
 }

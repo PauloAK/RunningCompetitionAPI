@@ -9,9 +9,13 @@ use App\Http\Resources\CompetitionResource;
 use App\Http\Requests\Competition\StoreRequest;
 use App\Http\Requests\Competition\UpdateRequest;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use \Illuminate\Http\JsonResponse;
 
 class CompetitionController extends Controller
 {
+    /**
+     * @var Competition
+     */
     private $competition;
 
     function __construct()
@@ -33,6 +37,7 @@ class CompetitionController extends Controller
     /**
      * Show a competition
      *
+     * @param Competition $competition
      * @return CompetitionResource
      */
     public function show(Competition $competition): CompetitionResource
@@ -43,6 +48,7 @@ class CompetitionController extends Controller
     /**
      * Store a new competition
      *
+     * @param StoreRequest $request
      * @return CompetitionResource
      */
     public function store(StoreRequest $request): CompetitionResource
@@ -54,6 +60,8 @@ class CompetitionController extends Controller
     /**
      * Update a competition
      *
+     * @param UpdateRequest $request
+     * @param Competition $competition
      * @return CompetitionResource
      */
     public function update(UpdateRequest $request, Competition $competition): CompetitionResource
@@ -65,9 +73,10 @@ class CompetitionController extends Controller
     /**
      * Delete a competition
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @param Competition $competition
+     * @return JsonResponse
      */
-    public function delete(Competition $competition): \Illuminate\Http\JsonResponse
+    public function delete(Competition $competition): JsonResponse
     {
         $competition->delete();
         return response()->json( ['message' => 'Succesfully deleted'], 200);

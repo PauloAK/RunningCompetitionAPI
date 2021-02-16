@@ -24,7 +24,7 @@ class Competition extends Model
      */
     public function competitors(): BelongsToMany
     {
-        return $this->belongsToMany(Competitor::class, Entry::class)->withPivot('start', 'finish', 'time');
+        return $this->belongsToMany(Competitor::class, Entry::class)->withPivot('id', 'start', 'finish')->as('entry');
     }
 
     /**

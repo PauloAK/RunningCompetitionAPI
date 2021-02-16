@@ -34,7 +34,8 @@ class Entry extends Pivot
      * @var array
      */
     protected $appends = [
-        'time'
+        'time',
+        'position'
     ];
 
     /**
@@ -49,6 +50,21 @@ class Entry extends Pivot
         else
             return Carbon::parse($this->attributes['start'])
                         ->diffForHumans(Carbon::parse($this->attributes['finish']), ['syntax' => CarbonInterface::DIFF_ABSOLUTE]);
+    }
+
+    /**
+     * Get the entry position
+     *
+     * @return int|null
+     */
+    public function getPositionAttribute(): ?int
+    {
+        $entries = $this->competition->competitors->sortBy('entry.time');
+        $entryId = $this->id;
+        $key = $entries->search(function($entry) use ($entryId) {
+            $entry->id == $entryId;
+        });
+        return $key ? $key + 1 : null;
     }
 
     /**

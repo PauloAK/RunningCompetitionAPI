@@ -26,7 +26,7 @@ class UpdateRequest extends FormRequest
         return [
             'name'      => 'required|max:125',
             'cpf'       => 'required|min:14|unique:competitors,cpf,' . $this->route('competitor')->id,
-            'birthdate' => 'required|date|before:today'
+            'birthdate' => 'required|date|before_or_equal:' . \Carbon\Carbon::now()->subYears(18)->format('Y-m-d')
         ];
     }
 }

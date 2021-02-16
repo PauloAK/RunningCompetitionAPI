@@ -20,7 +20,8 @@ class EntryResource extends JsonResource
             'competitor'        => new CompetitorResource( $this->whenLoaded('competitor') ),
             'start'             => $this->start,
             'finish'            => $this->finish,
-            'time'              => $this->time
+            'time'              => $this->time,
+            'position'          => $this->position
         ];
     }
 }

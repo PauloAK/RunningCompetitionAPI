@@ -9,9 +9,13 @@ use App\Http\Resources\EntryResource;
 use App\Http\Requests\Entry\StoreRequest;
 use App\Http\Requests\Entry\UpdateRequest;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use \Illuminate\Http\JsonResponse;
 
 class EntryController extends Controller
 {
+    /**
+     * @var Entry
+     */
     private $entry;
 
     function __construct()
@@ -33,6 +37,7 @@ class EntryController extends Controller
     /**
      * Show a entry
      *
+     * @param Entry $entry
      * @return EntryResource
      */
     public function show(Entry $entry): EntryResource
@@ -43,6 +48,7 @@ class EntryController extends Controller
     /**
      * Store a new entry
      *
+     * @param StoreRequest $request
      * @return EntryResource
      */
     public function store(StoreRequest $request): EntryResource
@@ -54,6 +60,8 @@ class EntryController extends Controller
     /**
      * Update a entry
      *
+     * @param UpdateRequest $request
+     * @param Entry $entry
      * @return EntryResource
      */
     public function update(UpdateRequest $request, Entry $entry): EntryResource
@@ -65,9 +73,10 @@ class EntryController extends Controller
     /**
      * Delete a entry
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @param Entry $entry
+     * @return JsonResponse
      */
-    public function delete(Entry $entry): \Illuminate\Http\JsonResponse
+    public function delete(Entry $entry): JsonResponse
     {
         $entry->delete();
         return response()->json( ['message' => 'Succesfully deleted'], 200);

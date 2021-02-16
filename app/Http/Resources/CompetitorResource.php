@@ -21,6 +21,9 @@ class CompetitorResource extends JsonResource
             'birthdate'     => $this->birthdate,
             'age'           => $this->age,
             'competitions'  => CompetitionResource::collection( $this->whenLoaded('competitions') ),
+            'entry'         => $this->whenPivotLoadedAs('entry', 'entries', function() {
+                return new EntryResource($this->entry);
+            }),
             'created_at'    => $this->created_at,
             'updated_at'    => $this->updated_at
         ];

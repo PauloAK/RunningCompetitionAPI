@@ -27,6 +27,7 @@ Route::namespace('API')->group( function() {
 
     Route::prefix('leaderboard')->name('leaderboard.')->group( function() {
         Route::get('/', 'LeaderboardController@index')->name('index');
+        Route::get('/competition/{competition}', 'LeaderboardController@competition')->name('competition');
         Route::get('/age', 'LeaderboardController@age')->name('age');
     });
 });

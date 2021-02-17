@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
+use Illuminate\Support\Collection;
 
 class Entry extends Pivot
 {
@@ -61,10 +62,26 @@ class Entry extends Pivot
     {
         $entries = $this->competition->competitors->sortBy('entry.time');
         $entryId = $this->id;
-        $key = $entries->search(function($entry) use ($entryId) {
-            $entry->id == $entryId;
+        $key = $entries->search(function($competitor) use ($entryId) {
+            return $competitor->entry->id == $entryId;
         });
-        return $key ? $key + 1 : null;
+        return $key !== false ? $key + 1 : null;
+    }
+
+    /**
+     * Calculates the entry position
+     *
+     * @param Collection $entries
+     * @return integer|null
+     */
+    public function getPosition(Collection $entries = null): ?int
+    {
+        $entries = $entries ?: $this->competition->competitors->sortBy('entry.time');
+        $entryId = $this->id;
+        $key = $entries->search(function($competitor) use ($entryId) {
+            return $competitor->entry->id == $entryId;
+        });
+        return $key !== false ? $key + 1 : null;
     }
 
     /**

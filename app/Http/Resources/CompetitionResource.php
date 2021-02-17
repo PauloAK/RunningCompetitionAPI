@@ -18,7 +18,16 @@ class CompetitionResource extends JsonResource
             'id'            => $this->id,
             'type'          => $this->type,
             'date'          => $this->date,
-            'competitors'   => CompetitorResource::collection( $this->whenLoaded('competitors') ),
+            $this->mergeWhen($this->resource->relationLoaded('competitors'), [
+                'competitors' => CompetitorResource::collection( $this->competitors )
+            ]),
+            $this->mergeWhen($this->groupBy, function(){
+                $array = array('competitors' => [] );
+                foreach ($this->groupBy as $group => $competitors) {
+                    $array['competitors'][$group] = CompetitorResource::collection($competitors);
+                }
+                return $array;
+            }),
             'created_at'    => $this->created_at,
             'updated_at'    => $this->updated_at
         ];

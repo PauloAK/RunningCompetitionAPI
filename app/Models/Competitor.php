@@ -31,7 +31,7 @@ class Competitor extends Model
     /**
      * Competitor age
      *
-     * @return integer
+     * @return int
      */
     public function getAgeAttribute(): int
     {
@@ -41,7 +41,7 @@ class Competitor extends Model
     /**
      * The competitions that belong to the Competitor
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
     public function competitions(): BelongsToMany
     {

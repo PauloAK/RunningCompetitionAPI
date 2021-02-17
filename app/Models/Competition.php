@@ -20,7 +20,7 @@ class Competition extends Model
     /**
      * The competitors that belong to the Competition
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
     public function competitors(): BelongsToMany
     {

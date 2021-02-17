@@ -72,7 +72,7 @@ class Entry extends Pivot
      * Calculates the entry position
      *
      * @param Collection $entries
-     * @return integer|null
+     * @return int|null
      */
     public function getPosition(Collection $entries = null): ?int
     {
@@ -87,7 +87,7 @@ class Entry extends Pivot
     /**
      * Get the competitor that owns the Entry
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function competitor(): BelongsTo
     {
@@ -97,7 +97,7 @@ class Entry extends Pivot
     /**
      * Get the competition that owns the Entry
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function competition(): BelongsTo
     {

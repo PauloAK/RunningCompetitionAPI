@@ -8,6 +8,8 @@ A simple Running Competitions Rest API, to register competitions, competitors an
 
 This project was fully builded with **Laravel 6**, and Rest API endpoints were tested in **Postman** (collection file is attached). Remains to do: PHP Unit Tests and Docker File.
 
+![ER Model](/docs/diagram.png)
+
 ## Installation
 
 *Clone this repository*

@@ -22,6 +22,12 @@ This project was fully builded with **Laravel 6**, and Rest API endpoints were t
 *Copy the example .env file*
 `cp .env.example .env`
 
+*Generate the application key*
+`php artisan key:generate`
+
+*Change bootstrap and storage folders permissions*
+`chmod -R 777 storage bootstrap/cache`
+
 *Configure database enviroment*
 `php artisan migrate`
 

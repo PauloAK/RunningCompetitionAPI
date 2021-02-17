@@ -27,8 +27,8 @@ class UpdateRequest extends FormRequest
         return [
             'competitor_id'     => 'bail|required|exists:competitors,id',
             'competition_id'    => ['bail', 'required', 'exists:competitions,id', new UniqueEntryOnDay( $this->input('competitor_id'), $this->route('entry')->id ) ],
-            'start'             => 'required|date',
-            'finish'            => 'required|date'
+            'start'             => 'nullable|date',
+            'finish'            => 'nullable|date|after_or_equal:start'
         ];
     }
 }

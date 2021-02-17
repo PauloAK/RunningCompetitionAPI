@@ -8,6 +8,26 @@ A simple Running Competitions Rest API, to register competitions, competitors an
 
 This project was fully builded with **Laravel 6**, and Rest API endpoints were tested in **Postman** (collection file is attached). Remains to do: PHP Unit Tests and Docker File.
 
+## Installation
+
+*Clone this repository*
+`git clone https://github.com/PauloAK/RunningCompetitionAPI.git`
+
+*Access the folder*
+`cd RunningCompetitionAPI`
+
+*Install dependencies*
+`composer install`
+
+*Copy the example .env file*
+`cp .env.example .env`
+
+*Configure database enviroment*
+`php artisan migrate`
+
+*Run the server*
+`php artisan serve`
+
 ## Endpoints
 
 ### Competitions
